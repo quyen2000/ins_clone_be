@@ -60,6 +60,10 @@ public class UserController {
     @GetMapping("/profile/{username}")
     public UserProfileResponse getUserProfileByUsername(@PathVariable(value = "username") String username,
                                                         @CurrentUser UserPrincipal currentUser) {
+        if(username.equals("me")){
+            System.out.println(username+ "," +currentUser.getUsername());
+            return userService.getUserProfileByUsername(currentUser.getUsername(), currentUser);
+        }
         return userService.getUserProfileByUsername(username, currentUser);
     }
 
